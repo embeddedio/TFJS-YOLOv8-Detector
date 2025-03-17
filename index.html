@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YOLOv8 Detection App Using Tenserflow-Js</title>
+  <style>
+    .main {
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 20px;
+    }
+    .header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .content {
+      position: relative;
+      max-width: 100%;
+      max-height: 80vh;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    #media, #webcam, #video {
+      max-width: 100%;
+      max-height: 80vh;
+      object-fit: contain;
+    }
+    #overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+    .controls {
+      margin-top: 20px;
+    }
+    .controls button {
+      margin: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="main">
+    <div id="status" class="status">Loading model... 0%</div>
+    <div class="header">
+      <h1>YOLOv8 Live Detection With Tenserflow-Js</h1>
+      <p>Serving: <code id="model-name">yolov8n</code></p>
+    </div>
+    <div class="controls">
+      <input type="file" id="file-input-image" accept="image/*" style="display: none;"/>
+      <button id="open-image">Import Image</button>
+      <input type="file" id="file-input-video" accept="video/*" style="display: none;"/>
+      <button id="open-video">Import Video</button>
+      <button id="open-camera">Read Webcam</button>
+      <div style="margin-top: 20px;">
+        <label for="confidence">Confidence Threshold:</label>
+        <input type="range" id="confidence" min="0" max="1" step="0.01" value="0.5" style="width: 200px;">
+        <span id="confidence-value">0.5</span>
+      </div>
+    </div>
+    <div class="content">
+      <img id="media" src="#" style="display: none;"/>
+      <video id="webcam" autoplay muted style="display: none;"></video>
+      <video id="video" autoplay muted style="display: none;"></video>
+      <canvas id="overlay"></canvas>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+  <script src="app.js"></script>
+</body>
+</html>
